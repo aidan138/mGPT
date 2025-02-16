@@ -10,6 +10,7 @@ eval_interval = 300
 learning_rate = 1e-2
 device = 'cuda' if torch.cuda.is_available() else 'cpu' # make code device agnostic
 eval_iters = 200
+n_embd = 32
 # -------------
 
 torch.manual_seed(1337)
@@ -68,7 +69,7 @@ class BigramLanguageModel(nn.Module):
     def __init__(self) -> None:
         super().__init__()
         # each token directly reads off the logits for the next token froma  lookup table
-        self.token_embedding_table = nn.Embedding(vocab_size, vocab_size)
+        self.token_embedding_table = nn.Embedding(vocab_size, n_embd)
 
     def forward(self, idx, targets=None):
 
